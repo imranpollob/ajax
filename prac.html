@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="src/css/bootstrap.min.css">
+    <script src="src/js/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+       $('#search').keyup(function () {
+           var search = $('#search').val();
+
+           $.ajax({
+               url: 'search.php',
+               data: {search:search},
+               type: 'POST',
+               success: function (data) {
+                   if(!data.error){
+                       $('#result').html(data);
+                   }
+               }
+           });
+       });
+
+    });
+</script>
+
+<div id="container" class="text-center col-xs-6 col-xs-offset-3">
+    <h2>Search database</h2>
+    <input type="text" id="search" class="form-control" name="search" placeholder="Search the ionventory">
+    <h2 id="result" class="bg-success">
+
+    </h2>
+
+</div>
+</body>
+</html>
